@@ -30,11 +30,14 @@ resource "aws_internet_gateway" "IGW" {
 # Create Route Table
 resource "aws_route_table" "PublicRT" {
   vpc_id = aws_vpc.myvpc.id
-  route = {
-    gateway_id = aws_internet_gateway.IGW.id
+  route {
     cidr_block = "0.0.0.0/0"
-    
+    gateway_id = aws_internet_gateway.gw.id
   }
+  tags = {
+    Name = "MyRoute"
+  }
+  
 }
 
 # Create route table association 
